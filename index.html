@@ -10,12 +10,26 @@
       background-repeat: no-repeat;
       background-size: cover;
     }
+    #username{
+      align-items: center;
+      border-radius: 25px;
+    }
+    #password{
+      border-radius: 25px;
+    }
+    #go{
+      border-radius: 25px;
+    }
+    #cors{
+      border-radius: 25px;
+    }
+    .all{
+      align-items: center;
+    }
   </style>
 </head>
 <body>
-  <p><input placeholder="username" id="username"/></p>
-  <p><input placeholder="password" id="password"/></p>
-  <button onclick="validate()">submit</button>
+  
   <script type="text/javascript">
   	
   	function validate(){
@@ -23,11 +37,18 @@
         console.log(username) 
         var password=document.getElementById("password").value
         console.log(password)
+        var selectbike=document.getElementById("cors").value
+        console.log(selectbike)
+        var gmale=document.getElementById("male").checked
+        var gfemale=document.getElementById("female").checked
+        if(gmale==true) var gender="male"
+          else var gender="female"
+            console.log(gender)
           fetch("http://localhost:2000/newData",{ method:"POST",
             headers:{
               "Content-Type":"application/json"
             },
-            body:JSON.stringify({name:username,password:password})
+            body:JSON.stringify({name:username,password:password,bikename:selectbike})
           }) 
           .then((res)=>{
             console.log(res)
@@ -38,7 +59,18 @@
             alert(err)
           })
   	}
-  	
   </script>
+  <p><input placeholder="username" id="username"/></p>
+  <p><input placeholder="password" id="password"/></p>
+  <select id="cors">
+     <option>select a bike</option>
+     <option>honda</option>
+     <option>duke</option>
+     <option>royal and field</option>
+  </select>
+</br>
+<p><input type="radio" name="gender" id="male">Male</p>
+<p><input type="radio" name="gender" id="female">Female</p><br>
+  <button id="go" onclick="validate()">submit</button>
 </body>
 </html>
